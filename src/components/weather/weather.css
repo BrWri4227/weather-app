@@ -1,0 +1,10 @@
+.container{
+    display: table;
+    align-self: center;
+    
+}
+
+
+.description{
+    text-transform: capitalize;
+}
