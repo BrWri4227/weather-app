@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import './App.css';
-import { Weather } from './components'
+import { Weather, Error } from './components'
 import axios from 'axios'
 
 function App() {
   const [lat, setLat] = useState([]);
   const [long, setLong] = useState([]);
   const [data, setData] = useState([]);
-  const[formData, setFormData] = useState([])
+  const [formData, setFormData] = useState({name: ''});
   // useEffect(() => {
   //   const fetchData = async () => {
-      // navigator.geolocation.getCurrentPosition(function(position) {
-      //   setLat(position.coords.latitude);
-      //   setLong(position.coords.longitude);
-      // });
+  // navigator.geolocation.getCurrentPosition(function(position) {
+  //   setLat(position.coords.latitude);
+  //   setLong(position.coords.longitude);
+  // });
 
   //     await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
   //     .then(res => res.json())
@@ -24,24 +24,54 @@ function App() {
   //   }
   //   fetchData();
   // }, [lat,long]);
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    if (formData.name === "" ) {
+      alert("Form is empty, please fill in any Canadian city name");
+      return;
+    }
+    // console.log(JSON.stringify(content))
+    console.log(formData.name);
+    // http://api.openweathermap.org/geo/1.0/direct?q=${formData.name},ON,CAN&limit={limit}&appid={API key}
+    axios.get(`${process.env.REACT_APP_API_URL}/weather?q=${formData.name}&appid=${process.env.REACT_APP_API_KEY}&units=metric`).then((response) => {
+      setData(response.data)
+      console.log(response.data)
+    }).catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data)
+        console.log(error.response.status)
+        if(error.response.status === 400){
+          alert("Invalid City. Please enter any Canadian city (Ex: Toronto).");
+        }
+        console.log(error.response.headers)
+      }
+    })
+    
+    setFormData({});
+  };
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
-    axios.get(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`).then((response) =>{
+    axios.get(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`).then((response) => {
       setData(response.data)
       console.log(response.data)
-    }).catch(function (error){
-      if(error.response){
+    }).catch(function (error) {
+      if (error.response) {
         console.log(error.response.data)
         console.log(error.response.status)
         console.log(error.response.headers)
       }
     })
-  },[lat,long]);
-  
+  }, [lat, long]);
+
   // const handleSubmit = async event => {
   //   event.preventDefault();
   //   if (formData.name === "" || formData.email === "" ) {
@@ -75,11 +105,17 @@ function App() {
   // };
   return (
     <div className="App">
-        {(typeof data.main != 'undefined') ? (
-        <Weather weatherData={data}/>
-      ): (
-     [])}
-        {/* <Weather weatherData={data}/> */}
+      {(typeof data.main != 'undefined') ? (
+        <Weather weatherData={data} />
+      ) : (
+        [<Error />])}
+      <div className="inputForm">
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="Search for any Canadian city" name='name' value={formData.name} onChange={handleChange}></input>
+          <button type="submit">SUBMIT</button>
+          <span class="msg"></span>
+        </form>
+      </div>
     </div>
   );
 }

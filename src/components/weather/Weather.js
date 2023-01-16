@@ -21,10 +21,9 @@ const Weather = ({ weatherData }) => {
 
     return () => clearInterval(interval);
   }, []);
-  return (
 
+  return (
     <div className="backdrop">
-      <h1></h1>
       <div className="container">
         <div className="location">
           <p>{weatherData?.name}</p>

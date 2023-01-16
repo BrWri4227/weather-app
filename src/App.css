@@ -1,3 +1,44 @@
 .App {
   text-align: center;
 }
+
+form {
+  padding: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 300px;
+  margin: auto;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  padding-right: 1rem;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid gray;
+  border-radius: 4px;
+  background-color: rgba(253, 254, 255, 0.616)
+}
+::placeholder{
+  color: white;
+}
+
+button[type="submit"] {
+  width: 25%;
+  background-color: gray;
+  color: white;
+  padding: 8px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* center text vertically */
+  text-align: center;
+}
+button[type="submit"]:hover {
+  background-color: rgba(75, 80, 83, 0.295);
+}
