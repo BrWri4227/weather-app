@@ -20,7 +20,9 @@ body {
     text-align: center;
 }
 
-.location{
+.location {
+    display: flex;
+    justify-content: space-between;
     border-radius: 15px;
     font-size: 2rem;
     font-weight: 900;
@@ -28,25 +30,35 @@ body {
     text-align: left;
     background-color: rgba(253, 254, 255, 0.616)
 }
-.location p{
-   padding-left: 1rem;
+
+.location p {
+    padding-left: 1rem;
 }
+
 .description {
     text-transform: capitalize;
 }
-.flex{
+
+.flex {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0.5rem;
+    padding-left: 2rem;
 }
-.flex p{
+
+.flex p {
     font-size: 1.5rem;
     padding-top: 1rem;
     padding-right: 4rem;
     margin: auto;
 }
-.flex h1{
+
+.flex h1 {
     padding-top: 0.7rem;
     padding-left: 4rem;
     margin: auto;
+}
+
+.time {
+    padding-right: 2rem;
 }
