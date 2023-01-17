@@ -1,7 +1,13 @@
+html {
+    height: 100%;
+}
+
 body {
-    background-color: gray;
-    background: url('../assets/gradient.jpg') no-repeat;
-    background-size: cover;
+    background: rgb(63, 94, 251);
+    /* background: url('../assets/gradient.jpg') no-repeat; */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .backdrop {
@@ -43,7 +49,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding-bottom: 0.5rem;
-    padding-left: 2rem;
+    padding-left: 1rem;
 }
 
 .flex p {
@@ -61,4 +67,29 @@ body {
 
 .time {
     padding-right: 2rem;
+}
+
+@media only screen and (max-width: 1024px) {
+    .container {
+        border-radius: 0;
+    }
+
+    .location {
+        font-size: 1.5rem;
+    }
+
+    .flex p {
+        padding-left: 3rem;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        border-radius: 0;
+    }
+
+    .location {
+        font-size: 1rem;
+    }
 }

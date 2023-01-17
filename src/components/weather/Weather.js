@@ -26,7 +26,7 @@ const Weather = ({ weatherData }) => {
     <div className="backdrop">
       <div className="container">
         <div className="location">
-          <p>{weatherData?.name}</p>
+          <p>{weatherData?.name},   {weatherData?.sys?.country}</p>
           <div className="time">
           <p>{time.toLocaleTimeString('en-IN')}</p>
           </div>
